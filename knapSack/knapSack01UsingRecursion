@@ -1,0 +1,66 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication2;
+
+import java.util.Scanner;
+
+
+/**
+ *
+ * @author misba zaidi
+ */
+public class NewMain {
+
+    /**
+     * @param args the command line arguments
+     * 
+     */ 
+    
+    static int knapSackRecursion(int W,int[] wt,int[] val,int n){
+        int[][] dp=new int[n+1][W+1];
+         //int dp[][]=new int[n+1][W+1];
+         return knapSackHelper(W,wt,val,n,dp);
+    } 
+     
+    
+   
+    static int knapSackHelper(int W, int wt[], int val[], int n,int[][] dp) 
+    { 
+         // your code here 
+         if(W==0||n==0)return 0;
+         if(dp[n][W]!=0)return dp[n][W];
+         if(wt[n-1]<=W){
+              return  dp[n][W]=Math.max(val[n-1]+knapSackHelper(W-wt[n-1],wt,val,n-1,dp),knapSackHelper(W,wt,val,n-1,dp));
+         }
+         else 
+             return  dp[n][W]=knapSackHelper(W,wt,val,n-1,dp);
+         }
+         //return dp[n][W];
+
+    
+
+
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner s=new Scanner(System.in);
+        int W=s.nextInt();
+        int n=s.nextInt();
+        int[] wt=new int[n];
+        int[] val=new int[n];
+        for(int i=0;i<n;i++){
+            wt[i]=s.nextInt();
+        }
+        for(int j=0;j<n;j++){
+            val[j]=s.nextInt();
+        }
+       
+            System.out.print(knapSackRecursion(W,wt,val,n));
+    }
+}
+    
+
+
